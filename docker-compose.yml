@@ -7,13 +7,28 @@ services:
       - .env
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
     volumes:
       - pg-data:/var/lib/postgresql/data
     networks:
       app-network:
+
+  survey-service:
+    build: .
+    ports:
+      - "8000:8000"
+    command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    env_file:
+      - .env
+    networks:
+      app-network:
+    volumes:
+      - ./:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   pg-data:

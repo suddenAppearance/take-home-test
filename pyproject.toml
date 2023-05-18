@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "salary api"
+name = "survey api"
 version = "0.1.0"
-description = "API for querying salary data"
+description = "API for querying survey data"
 authors = ["sudden_appearance <kuz.damir.01@gmail.com>"]
 readme = "README.md"
 
@@ -13,6 +13,8 @@ pydantic = "^1.10.7"
 sqlalchemy = "^2.0.14"
 alembic = "^1.11.1"
 asyncpg = "^0.27.0"
+urllib3 = "^2.0.2"
+uvicorn = "^0.22.0"
 
 
 [tool.poetry.group.stubs.dependencies]
