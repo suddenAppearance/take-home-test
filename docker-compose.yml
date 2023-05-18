@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:14.2
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      app-network:
+
+volumes:
+  pg-data:
+    driver: local
+
+networks:
+  app-network:
